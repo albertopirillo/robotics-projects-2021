@@ -1,8 +1,0 @@
-{
-    "python.autoComplete.extraPaths": [
-        "/array/first_project/devel/lib/python2.7/dist-packages",
-        "/array/robotics/devel/lib/python2.7/dist-packages",
-        "/opt/ros/melodic/lib/python2.7/dist-packages"
-    ],
-    "python.pythonPath": "/usr/bin/python3"
-}
