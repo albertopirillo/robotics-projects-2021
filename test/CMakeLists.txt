@@ -10,7 +10,7 @@ project(test)
 find_package(catkin REQUIRED COMPONENTS
   message_filters
   robotics_hw1
-  rosccp
+  roscpp
   rospy
   std_msgs
 )
@@ -107,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES test
-#  CATKIN_DEPENDS message_filters robotics_hw1 rosccp rospy std_msgs
+#  CATKIN_DEPENDS message_filters robotics_hw1 roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
