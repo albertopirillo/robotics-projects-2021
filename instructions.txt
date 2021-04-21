@@ -1,0 +1,19 @@
+Gear ratio was existimated by plotting simultaneously in rqt_plot:
+-   /scout_odom/twist/twist/linear/x
+-   /my_value/twistt/linear/x
+And by using the bisection method:
+- Interval: [35, 40] => computed value: 37.5 => estimate was bigger
+- Interval: [37.5, 40] => computed value: 38.75 => scout_odom was bigger
+- Interval: [37.5, 38.75] => computed value: 38.125 => good match between the graphs
+
+The apparent baseline was existimated in a similar way with:
+-   /scout_odom/twist/twist/angular/z
+-   /my_value/twistt/angular/z
+apparent_baseline = real_basiline * x
+- With x = 1, estimate was bigger
+- With x = 2, scout_odom was bigger
+- Interval: [1, 2] => computed value: 1.5 => estimate was bigger
+- Interval: [1.5, 2] => computed value: 1.75 => estimate was bigger
+- Interval: [1.75, 2] => computed value: 1.875 => scout_odom was bigger
+- Interval: [1.75, 1.875] => computed value: 1.8125 => scout_odom was bigger
+- Interval: [1.75, 1.8125] => computed value: 1.78125 => good match between the graphs
