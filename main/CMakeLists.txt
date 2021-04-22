@@ -139,6 +139,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/main_node.cpp)
 add_executable(sub src/sub.cpp)
+add_executable(calib src/calibration.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,6 +156,7 @@ add_executable(sub src/sub.cpp)
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(sub ${catkin_LIBRARIES})
+target_link_libraries(calib ${catkin_LIBRARIES})
 
 #############
 ## Install ##
