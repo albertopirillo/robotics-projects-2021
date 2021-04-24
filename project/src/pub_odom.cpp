@@ -34,8 +34,9 @@ public:
         pub = n.advertise<project::Odom_and_method>("/my_odom", 1000);
         n.getParam("/initial_x", x);  
         n.getParam("/initial_y", y);  
-        n.getParam("/initial_theta", x);  
+        n.getParam("/initial_theta", theta);  
         current_time = ros::Time::now();
+        last_time = ros::Time::now();
     }
 
     void callback(const geometry_msgs::TwistStamped::ConstPtr& twist) 
@@ -50,13 +51,16 @@ public:
         ROS_INFO("Computing odometry with Euler");
         msg.method.data = "Euler";
 
-        current_time = twist->header.stamp;
-        int Ts =  (current_time - last_time).toNSec();
+        current_time = ros::Time::now();
+        int Ts_NSec =  (current_time - last_time).toNSec();
+        float Ts_Sec = Ts_NSec / 1000000000.0;
         last_time = current_time;
 
-        x = x + twist->twist.linear.x * Ts * cos(theta);
-        y = y + twist->twist.linear.y * Ts * sin(theta);
-        theta = theta + twist->twist.angular.z * Ts;
+        //With skid-steering approximate kinematics, vel_y is always 0
+        float vel = twist->twist.linear.x; 
+        x = x + vel * Ts_Sec * cos(theta);
+        y = y + vel * Ts_Sec * sin(theta);
+        theta = theta + twist->twist.angular.z * Ts_Sec;
         publish_msg(twist);
     }
 
@@ -65,13 +69,17 @@ public:
         ROS_INFO("Computing odometry with Runge-Kutta");
         msg.method.data = "Runge-Kutta";
 
-        current_time = twist->header.stamp;
-        int Ts =  (current_time - last_time).toNSec();
+        current_time = ros::Time::now();
+        int Ts_NSec =  (current_time - last_time).toNSec();
+        float Ts_Sec = Ts_NSec / 1000000000.0;
         last_time = current_time;
 
-        x = x + twist->twist.linear.x * Ts * cos(theta + (twist->twist.angular.z * Ts / 2));
-        x = x + twist->twist.linear.x * Ts * sin(theta + (twist->twist.angular.z * Ts / 2));
-        theta = theta + twist->twist.angular.z * Ts;
+        //TODO: probably twsit.angular.z is broken => debug with pritnf
+        float argument = theta + ((twist->twist.angular.z * Ts_NSec) / 2.0);
+        float vel = twist->twist.linear.x;
+        x = x + vel * Ts_NSec * cos(argument);
+        y = y + vel * Ts_NSec * sin(argument);
+        theta = theta + twist->twist.angular.z * Ts_NSec;
         publish_msg(twist);
     }
 
@@ -81,7 +89,7 @@ public:
         msg.odom.pose.pose.position.y = y;
         msg.odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(theta);
 
-        msg.odom.header = twist->header;
+        msg.odom.header.stamp.sec = twist->header.stamp.sec;
         //msg.odom.child_frame_id = //TODO
         msg.odom.twist.twist = twist->twist;
         pub.publish(msg);  
