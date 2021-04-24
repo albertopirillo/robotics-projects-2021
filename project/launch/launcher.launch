@@ -1,0 +1,15 @@
+<launch>
+
+    <param name="initial_x" value="0"></param>
+    <param name="initial_y" value="0"></param>
+    <param name="initial_theta" value="0"></param>
+
+    <!-- TODO: remove bag and rqt -->
+    <node pkg="rosbag" type="play" name="bag1" args="/array/first_project/src/bags/bag1.bag"></node>
+
+    <node pkg="project" type="params" name="params"></node>
+    <node pkg="project" type="pub_twist" name="pub_twist"></node>
+    <node pkg="project" type="pub_odom" name="pub_odom" output="screen"></node>
+    <!-- <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="reconf"></node> -->
+
+</launch>
