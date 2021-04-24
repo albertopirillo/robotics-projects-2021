@@ -32,3 +32,26 @@ Baseline calibration:
 So I modified the value I got from bisection with the ratio got obtained by computing the values:
 - Gear ratio: 1:38.2189
 - Apparent baseline: real baseline * 1.7937 = 1.0457 m
+
+Initial pose from /gt_pose:
+position: 
+    x: -0.832142114639
+    y: 0.426361680031
+    z: 0.324720174074
+orientation: 
+    x: 0.0221652016044
+    y: -0.0104456143454
+    z: -0.533567428589
+    w: 0.845402538776
+
+Initial pose from /scout_odom:
+position: 
+    x: 0.0
+    y: 0.0
+    z: 0.0
+orientation: 
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+=> theta = 0.0

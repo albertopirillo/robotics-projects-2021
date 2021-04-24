@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
   dynamic_reconfigure
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -56,6 +57,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   Odom_and_method.msg
+  
 # Message1.msg
 # Message2.msg
 )
@@ -143,7 +145,8 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(sub src/sub.cpp)
 add_executable(calib src/calibration.cpp)
 add_executable(pub_twist src/pub_twist)
-add_executable(param src/param.cpp)
+add_executable(params src/params.cpp)
+add_executable(pub_odom src/pub_odom.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -154,7 +157,7 @@ add_executable(param src/param.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(param ${PROJECT_NAME}_gencfg)
+add_dependencies(params ${PROJECT_NAME}_gencfg)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -163,7 +166,8 @@ add_dependencies(param ${PROJECT_NAME}_gencfg)
 target_link_libraries(sub ${catkin_LIBRARIES})
 target_link_libraries(calib ${catkin_LIBRARIES})
 target_link_libraries(pub_twist ${catkin_LIBRARIES})
-target_link_libraries(param ${catkin_LIBRARIES})
+target_link_libraries(params ${catkin_LIBRARIES})
+target_link_libraries(pub_odom ${catkin_LIBRARIES})
 
 #############
 ## Install ##

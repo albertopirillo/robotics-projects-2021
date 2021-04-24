@@ -5,14 +5,14 @@
 
 void callback(project::parametersConfig &config, uint32_t bitmask_level)
 {
-    ROS_INFO("Reconfigure request: %d", config.method_param);
+    ROS_INFO("Reconfigure request: %d", config.method);
     ROS_INFO ("%d",bitmask_level);
 }
 
-//TODO: initialize parameter into launch file
+
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "param");
+    ros::init(argc, argv, "params");
     ros::NodeHandle n;
 
     //Publish initial parameters (no dynamic reconfigure needed)
