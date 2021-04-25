@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     }
     else
     {
-        ROS_INFO("Failed to call service set_odom");
+        ROS_ERROR("Failed to call service set_odom");
         return 1;
     }
     return 0;

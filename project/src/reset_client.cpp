@@ -13,13 +13,14 @@ int main(int argc, char** argv)
     ros::NodeHandle n;
     ros::ServiceClient reset_client = n.serviceClient<project::Reset_odom>("reset_odom");
     project::Reset_odom srv;
+
     if (reset_client.call(srv))
     {
         ROS_INFO("Odometry has been reset");
     }
     else
     {
-        ROS_INFO("Failed to call service reset_odom");
+        ROS_ERROR("Failed to call service reset_odom");
         return 1;
     }
     return 0;

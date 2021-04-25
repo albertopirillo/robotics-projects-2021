@@ -10,6 +10,6 @@
     <node pkg="project" type="params" name="params"></node>
     <node pkg="project" type="pub_twist" name="pub_twist"></node>
     <node pkg="project" type="pub_odom" name="pub_odom" output="screen"></node>
-    <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="reconf"></node>
+    <!-- <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="reconf"></node> -->
 
 </launch>
