@@ -40,7 +40,7 @@ public:
         last_time = ros::Time::now();
     }
     
-    bool reset(project::Set_odom::Request &req, project::Set_odom::Response &res)
+    bool reset(project::Reset_odom::Request &req, project::Reset_odom::Response &res)
     {
         x = 0;
         y = 0;
