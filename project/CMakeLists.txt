@@ -63,11 +63,12 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  Reset_odom.srv
+  Set_odom.srv
+
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -115,7 +116,7 @@ generate_dynamic_reconfigure_options(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES project
-  CATKIN_DEPENDS message_filters robotics_hw1 roscpp rospy std_msgs dynamic_reconfigure
+  CATKIN_DEPENDS message_filters message_runtime robotics_hw1 roscpp rospy std_msgs dynamic_reconfigure
 #  DEPENDS system_lib
 )
 
@@ -147,6 +148,8 @@ add_executable(calib src/calibration.cpp)
 add_executable(pub_twist src/pub_twist)
 add_executable(params src/params.cpp)
 add_executable(pub_odom src/pub_odom.cpp)
+add_executable(reset src/reset_client.cpp)
+add_executable(set src/set_client.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -158,6 +161,9 @@ add_executable(pub_odom src/pub_odom.cpp)
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(params ${PROJECT_NAME}_gencfg)
+add_dependencies(pub_odom ${catkin_EXPORTED_TARGETS})
+add_dependencies(reset ${catkin_EXPORTED_TARGETS})
+add_dependencies(set ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -168,6 +174,8 @@ target_link_libraries(calib ${catkin_LIBRARIES})
 target_link_libraries(pub_twist ${catkin_LIBRARIES})
 target_link_libraries(params ${catkin_LIBRARIES})
 target_link_libraries(pub_odom ${catkin_LIBRARIES})
+target_link_libraries(reset ${catkin_LIBRARIES})
+target_link_libraries(set ${catkin_LIBRARIES})
 
 #############
 ## Install ##
