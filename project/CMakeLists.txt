@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   dynamic_reconfigure
   tf
+  tf2 
+  tf2_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -148,6 +150,7 @@ add_executable(calib src/calibration.cpp)
 add_executable(pub_twist src/pub_twist)
 add_executable(params src/params.cpp)
 add_executable(pub_odom src/pub_odom.cpp)
+add_executable(tf_node src/tf.cpp)
 add_executable(reset src/reset_client.cpp)
 add_executable(set src/set_client.cpp)
 
@@ -165,6 +168,7 @@ add_dependencies(pub_odom ${catkin_EXPORTED_TARGETS})
 add_dependencies(reset ${catkin_EXPORTED_TARGETS})
 add_dependencies(set ${catkin_EXPORTED_TARGETS})
 
+
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
@@ -174,8 +178,10 @@ target_link_libraries(calib ${catkin_LIBRARIES})
 target_link_libraries(pub_twist ${catkin_LIBRARIES})
 target_link_libraries(params ${catkin_LIBRARIES})
 target_link_libraries(pub_odom ${catkin_LIBRARIES})
+target_link_libraries(tf_node ${catkin_LIBRARIES})
 target_link_libraries(reset ${catkin_LIBRARIES})
 target_link_libraries(set ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##

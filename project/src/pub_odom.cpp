@@ -68,7 +68,7 @@ public:
     void compute_euler(const geometry_msgs::TwistStamped::ConstPtr& twist) 
     {
         ROS_INFO("Computing odometry with Euler");
-        msg.method.data = "Euler";
+        msg.method.data = "euler";
 
         current_time = ros::Time::now();
         int Ts_NSec =  (current_time - last_time).toNSec();
@@ -86,7 +86,7 @@ public:
     void compute_runge_kutta(const geometry_msgs::TwistStamped::ConstPtr& twist)
     {
         ROS_INFO("Computing odometry with Runge-Kutta");
-        msg.method.data = "Runge-Kutta";
+        msg.method.data = "rk";
 
         current_time = ros::Time::now();
         int Ts_NSec =  (current_time - last_time).toNSec();
@@ -104,18 +104,19 @@ public:
 
     void publish_msg(const geometry_msgs::TwistStamped::ConstPtr& twist) 
     {
+        msg.odom.header.stamp = twist->header.stamp;
+        msg.odom.header.seq = twist->header.seq;
+        msg.odom.header.frame_id = "odom";
+        msg.odom.child_frame_id = "base_link";
+   
         msg.odom.pose.pose.position.x = x;
         msg.odom.pose.pose.position.y = y;
+        msg.odom.pose.pose.position.z = 0;
         msg.odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(theta);
-
-        msg.odom.header.stamp.sec = twist->header.stamp.sec;
-        //msg.odom.child_frame_id = //TODO
         msg.odom.twist.twist = twist->twist;
         pub.publish(msg);  
     }
 };
-
-
 
 int main(int argc, char** argv)
 {

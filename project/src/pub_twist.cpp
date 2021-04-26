@@ -30,7 +30,8 @@ void estimate_callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFR,
     /////////////////////////////////////////////////////////////
 
     geometry_msgs::TwistStamped msg;
-    msg.header = motorFR->header;
+    msg.header.stamp = motorFR->header.stamp;
+    msg.header.frame_id = "odom";
     msg.twist.linear.x = vel_x;
     msg.twist.linear.y = 0;
     msg.twist.linear.z = 0;
