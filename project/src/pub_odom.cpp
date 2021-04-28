@@ -93,7 +93,6 @@ public:
         float Ts_Sec = Ts_NSec / 1000000000.0;
         last_time = current_time;
 
-        //TODO: probably twsit.angular.z is broken => debug with pritnf
         float argument = theta + ((twist->twist.angular.z * Ts_Sec) / 2.0);
         float vel = twist->twist.linear.x;
         x = x + vel * Ts_Sec * cos(argument);

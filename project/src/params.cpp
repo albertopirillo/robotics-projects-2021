@@ -9,7 +9,7 @@ void callback(project::parametersConfig &config, uint32_t bitmask_level)
     ROS_INFO ("%d",bitmask_level);
 }
 
-
+//TODO: publish only one param?
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "params");
