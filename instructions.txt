@@ -1,57 +1,48 @@
-Gear ratio was calibrated by plotting simultaneously in rqt_plot:
--   /scout_odom/twist/twist/linear/x
--   /estimate/twistt/linear/x
-And by using the bisection method:
-- Interval: [35, 40] => computed value: 37.5 => estimate was bigger
-- Interval: [37.5, 40] => computed value: 38.75 => scout_odom was bigger
-- Interval: [37.5, 38.75] => computed value: 38.125 => good match between the graphs
+10667220, Alberto Pirillo
 
-The apparent baseline was calibrated in a similar way with:
--   /scout_odom/twist/twist/angular/z
--   /estimate/twist/angular/z
-apparent_baseline = real_basiline * x
-- With x = 1, estimate was bigger
-- With x = 2, scout_odom was bigger
-- Interval: [1, 2] => computed value: 1.5 => estimate was bigger
-- Interval: [1.5, 2] => computed value: 1.75 => estimate was bigger
-- Interval: [1.75, 2] => computed value: 1.875 => scout_odom was bigger
-- Interval: [1.75, 1.875] => computed value: 1.8125 => scout_odom was bigger
-- Interval: [1.75, 1.8125] => computed value: 1.78125 => good match between the graphs
+Files description:
 
-Later I realized that computing the average of all the bag's values could lead to better results:
-Gear calibration:
-- /scout_odom/twist/twist/linear/x average: 0.318389
-- /estimate/twist/linear/x average: 0.319173
-=> ratio: 0.997544
+Parameters description:
 
-Baseline calibration:
-- /scout_odom/twist/twist/angular/z average: 0.073351
-- /estimate/twist/angular/z average: 0.072842
-=> ratio: 1.006987
+TF tree structure:
 
-So I modified the value I got from bisection with the ratio got obtained by computing the values:
-- Gear ratio: 1:38.2189
-- Apparent baseline: real baseline * 1.7937 = 1.0457 m
+Custom message structure:
 
-Initial pose from /gt_pose:
-position: 
-    x: -0.832142114639
-    y: 0.426361680031
-    z: 0.324720174074
-orientation: 
-    x: 0.0221652016044
-    y: -0.0104456143454
-    z: -0.533567428589
-    w: 0.845402538776
+Launchfiles description:
 
-Initial pose from /scout_odom:
-position: 
-    x: 0.0
-    y: 0.0
-    z: 0.0
-orientation: 
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-=> theta = 0.0
+
+Additional infos:
+    Gear ratio was calibrated by plotting simultaneously in rqt_plot:
+    -   /scout_odom/twist/twist/linear/x
+    -   /estimate/twistt/linear/x
+    And by using the bisection method:
+    - Interval: [35, 40] => computed value: 37.5 => estimate was bigger
+    - Interval: [37.5, 40] => computed value: 38.75 => scout_odom was bigger
+    - Interval: [37.5, 38.75] => computed value: 38.125 => good match between the graphs
+
+    The apparent baseline was calibrated in a similar way with:
+    -   /scout_odom/twist/twist/angular/z
+    -   /estimate/twist/angular/z
+    apparent_baseline = real_basiline * x
+    - With x = 1, estimate was bigger
+    - With x = 2, scout_odom was bigger
+    - Interval: [1, 2] => computed value: 1.5 => estimate was bigger
+    - Interval: [1.5, 2] => computed value: 1.75 => estimate was bigger
+    - Interval: [1.75, 2] => computed value: 1.875 => scout_odom was bigger
+    - Interval: [1.75, 1.875] => computed value: 1.8125 => scout_odom was bigger
+    - Interval: [1.75, 1.8125] => computed value: 1.78125 => good match between the graphs
+
+    Later I realized that computing the average of all the bag's values could lead to better results:
+    Gear calibration:
+    - /scout_odom/twist/twist/linear/x average: 0.318389
+    - /estimate/twist/linear/x average: 0.319173
+    => ratio: 0.997544
+
+    Baseline calibration:
+    - /scout_odom/twist/twist/angular/z average: 0.073351
+    - /estimate/twist/angular/z average: 0.072842
+    => ratio: 1.006987
+
+    So I modified the value I got from bisection with the ratio got obtained by computing the values:
+    - Gear ratio: 1:38.2189
+    - Apparent baseline: real baseline * 1.7937 = 1.0457 m
