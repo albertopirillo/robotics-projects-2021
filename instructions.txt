@@ -1,33 +1,51 @@
 10667220, Alberto Pirillo
 
 Files description:
+    - calibration.cpp: used only to calibrate the baseline and the gear ratio, not needed
+    - data.h: contains the robot's charateristics
+    - params.cpp: handles dynamic reconfigure and the parameters for the initial pose
+    - pub_twist.cpp: synchronizes the motor speed messages, computes and publishes twist in /my_twist topic
+    - pub_odom.cpp: gets the twist from /my_twist, computes and publishes the odometry in /my_odom topic
+    - reset_client.cpp: client to run the reset position service
+    - set_clinet.cpp: client to run the set position service
+    - tf.cpp: handles TF data, retrieving data from /my_odom and broadcasting it
 
 Parameters description:
+    - initial_x, initial_y, initial_theta are std:msgs::Float64 params to set the initial position
+    - method is the paramter that can be dynamically reconfigured to change integration method
 
 TF tree structure:
+    - //TODO rosrun rqt_tf_tree rqt_tf_tree
+    - //TODO rqt_graph and select active nodes/topics
 
 Custom message structure:
+    - Odom_and_method.msg contains:
+        - The computed odometry from pub_odom.cpp
+        - The integration method, that can be either "euler" or "rk"
 
 Launchfiles description:
+    - launch.launcher: the launchfile that was asked in the requirements, it only launches what is necessary
+    - bag.launcher: in addition to the previous one, it also plays bag1.bag
+    - rqt.launcher: in addition to the previous one, it also opens a GUI for dynamic reconfigure
 
 
 Additional infos:
     Gear ratio was calibrated by plotting simultaneously in rqt_plot:
     -   /scout_odom/twist/twist/linear/x
-    -   /estimate/twistt/linear/x
+    -   /my_twist/twistt/linear/x
     And by using the bisection method:
-    - Interval: [35, 40] => computed value: 37.5 => estimate was bigger
+    - Interval: [35, 40] => computed value: 37.5 => my_twist was bigger
     - Interval: [37.5, 40] => computed value: 38.75 => scout_odom was bigger
     - Interval: [37.5, 38.75] => computed value: 38.125 => good match between the graphs
 
     The apparent baseline was calibrated in a similar way with:
     -   /scout_odom/twist/twist/angular/z
-    -   /estimate/twist/angular/z
+    -   /my_twist/twist/angular/z
     apparent_baseline = real_basiline * x
-    - With x = 1, estimate was bigger
+    - With x = 1, my_twist was bigger
     - With x = 2, scout_odom was bigger
-    - Interval: [1, 2] => computed value: 1.5 => estimate was bigger
-    - Interval: [1.5, 2] => computed value: 1.75 => estimate was bigger
+    - Interval: [1, 2] => computed value: 1.5 => my_twist was bigger
+    - Interval: [1.5, 2] => computed value: 1.75 => my_twist was bigger
     - Interval: [1.75, 2] => computed value: 1.875 => scout_odom was bigger
     - Interval: [1.75, 1.875] => computed value: 1.8125 => scout_odom was bigger
     - Interval: [1.75, 1.8125] => computed value: 1.78125 => good match between the graphs
@@ -35,12 +53,12 @@ Additional infos:
     Later I realized that computing the average of all the bag's values could lead to better results:
     Gear calibration:
     - /scout_odom/twist/twist/linear/x average: 0.318389
-    - /estimate/twist/linear/x average: 0.319173
+    - /my_twist/twist/linear/x average: 0.319173
     => ratio: 0.997544
 
     Baseline calibration:
     - /scout_odom/twist/twist/angular/z average: 0.073351
-    - /estimate/twist/angular/z average: 0.072842
+    - /my_twist/twist/angular/z average: 0.072842
     => ratio: 1.006987
 
     So I modified the value I got from bisection with the ratio got obtained by computing the values:
