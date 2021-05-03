@@ -1,26 +1,16 @@
 <launch>
 
-    <!-- //TODO: this should be cut -->
-    <!-- params to compare with /gt_pose -->
-    <!-- <param name="initial_x" value="-0.832142114639"></param>
-    <param name="initial_y" value="0.426361680031"></param>
-    <param name="initial_theta" value="-1.125828405392275"></param> -->
-    <!-- radians: -1.125828405392275 -->
-    <!-- degrees: -64.50523914967471 -->
-
     <!-- params to compare with /scout_odom -->
     <param name="initial_x" value="0"></param>
     <param name="initial_y" value="0"></param>
     <param name="initial_theta" value="0"></param>
 
-    <!-- TODO: remove bag and rqt -->
     <node pkg="rosbag" type="play" name="bag1" args="/array/first_project/src/bags/bag1.bag"></node>
-
+    
     <node pkg="project" type="params" name="params"></node>
     <node pkg="project" type="pub_twist" name="pub_twist" output="screen"></node>
     <node pkg="project" type="pub_odom" name="pub_odom" output="screen"></node>
     <node pkg="project" type="tf_node" name="tf_node"></node>
-    <!-- <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="reconf"></node> -->
 
     <!-- TODO: still not working  -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="world"
