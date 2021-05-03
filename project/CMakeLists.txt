@@ -50,7 +50,6 @@ generate_dynamic_reconfigure_options(
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ executable
-add_executable(sub src/sub.cpp)
 add_executable(calib src/calibration.cpp)
 add_executable(pub_twist src/pub_twist)
 add_executable(params src/params.cpp)
@@ -66,7 +65,6 @@ add_dependencies(reset ${catkin_EXPORTED_TARGETS})
 add_dependencies(set ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(sub ${catkin_LIBRARIES})
 target_link_libraries(calib ${catkin_LIBRARIES})
 target_link_libraries(pub_twist ${catkin_LIBRARIES})
 target_link_libraries(params ${catkin_LIBRARIES})
