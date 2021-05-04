@@ -44,8 +44,8 @@ public:
     {
         x = 0;
         y = 0;
-        theta = 0; //TODO: also theta?
-        ROS_INFO("Odom has been reset to (0,0)");
+        theta = 0;
+        ROS_INFO("Odom has been reset to (0,0, 0)");
         return true;
     }
 

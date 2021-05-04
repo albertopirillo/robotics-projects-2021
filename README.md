@@ -8,7 +8,7 @@ Estimate linear and angular velocity from motors speed and then compute odometry
     
 **2.** Use dynamic reconfigure to select between integration method
 
-**3.** Write 2 services to reset the odometry to (0,0) or to a pose (x,y,θ)
+**3.** Write 2 services to reset the odometry to (0,0,0) or to a pose (x,y,θ)
 
 **4.** Publish a custom message with odometry value and type of integration
 
