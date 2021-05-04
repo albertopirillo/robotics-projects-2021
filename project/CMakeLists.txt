@@ -4,6 +4,7 @@ project(project)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
+## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS
   message_filters
   robotics_hw1
@@ -47,6 +48,18 @@ generate_dynamic_reconfigure_options(
 
 )
 
+## Declare things to be passed to dependent projects
+## DEPENDS: system dependencies of this project that dependent projects also need
+catkin_package(
+  CATKIN_DEPENDS 
+  message_runtime
+  std_msgs
+  nav_msgs
+
+)
+
+## Specify additional locations of header files
+## Your package locations should be listed before other locations
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ executable
