@@ -2,17 +2,17 @@
 
 Files description:
     - calibration.cpp: used only to calibrate the baseline and the gear ratio, not needed
-    - data.h: contains the robot's charateristics
+    - data.h: contains the robot's characteristics
     - params.cpp: handles dynamic reconfigure and the parameters for the initial pose
     - pub_twist.cpp: synchronizes the motor speed messages, computes and publishes twist in /my_twist topic
     - pub_odom.cpp: gets the twist from /my_twist, computes and publishes the odometry in /my_odom topic
     - reset_client.cpp: client to run the reset position service
-    - set_clinet.cpp: client to run the set position service
+    - set_client.cpp: client to run the set position service
     - tf.cpp: handles TF data, retrieving data from /my_odom and broadcasting it
 
 Parameters description:
     - initial_x, initial_y, initial_theta are std:msgs::Float64 params to set the initial position
-    - method is the paramter that can be dynamically reconfigured to change integration method
+    - method is the parameter that can be dynamically reconfigured to change integration method
 
 TF tree structure:
     - //TODO rosrun rqt_tf_tree rqt_tf_tree
@@ -32,7 +32,7 @@ Launchfiles description:
 Additional infos:
     Gear ratio was calibrated by plotting simultaneously in rqt_plot:
     -   /scout_odom/twist/twist/linear/x
-    -   /my_twist/twistt/linear/x
+    -   /my_twist/twist/linear/x
     And by using the bisection method:
     - Interval: [35, 40] => computed value: 37.5 => my_twist was bigger
     - Interval: [37.5, 40] => computed value: 38.75 => scout_odom was bigger
@@ -41,7 +41,7 @@ Additional infos:
     The apparent baseline was calibrated in a similar way with:
     -   /scout_odom/twist/twist/angular/z
     -   /my_twist/twist/angular/z
-    apparent_baseline = real_basiline * x
+    apparent_baseline = real_baseline * x
     - With x = 1, my_twist was bigger
     - With x = 2, scout_odom was bigger
     - Interval: [1, 2] => computed value: 1.5 => my_twist was bigger

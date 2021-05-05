@@ -9,22 +9,18 @@
     <!-- degrees: -64.50523914967471 -->
 
     <!-- params to compare with /scout_odom -->
-    <param name="initial_x" value="0"></param>
-    <param name="initial_y" value="0"></param>
-    <param name="initial_theta" value="0"></param>
+    <param name="initial_x" value="0"/>
+    <param name="initial_y" value="0"/>
+    <param name="initial_theta" value="0"/>
 
-    <!-- TODO: remove bag and rqt -->
-    <node pkg="rosbag" type="play" name="bag1" args="/array/first_project/src/bags/bag1.bag"></node>
-
-    <node pkg="project" type="params" name="params"></node>
-    <node pkg="project" type="pub_twist" name="pub_twist" output="screen"></node>
-    <node pkg="project" type="pub_odom" name="pub_odom" output="screen"></node>
-    <node pkg="project" type="tf_node" name="tf_node"></node>
-    <!-- <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="reconf"></node> -->
+    <node pkg="project" type="params" name="params"/>
+    <node pkg="project" type="pub_twist" name="pub_twist" output="screen"/>
+    <node pkg="project" type="pub_odom" name="pub_odom" output="screen"/>
+    <node pkg="project" type="tf_node" name="tf_node"/>
 
     <!-- TODO: still not working  -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="world"
-        args="-0.832142114639 0.426361680031 0.324720174074 0.0221652016044 -0.0104456143454 -0.533567428589 0.845402538776
-        odom world"></node> 
+          args="-0.832142114639 0.426361680031 0.324720174074 0.0221652016044 -0.0104456143454 -0.533567428589 0.845402538776
+        odom world"/>
 
 </launch>

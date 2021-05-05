@@ -38,6 +38,7 @@ public:
         sync->registerCallback(boost::bind(&pub_twist::callback, this, _1, _2, _3, _4));
     }
 
+
     void callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFR,
               const robotics_hw1::MotorSpeed::ConstPtr& motorRR,
               const robotics_hw1::MotorSpeed::ConstPtr& motorRL,

@@ -5,7 +5,7 @@
 #include "geometry_msgs/TwistStamped.h"
 #include "project/Reset_odom.h"
 #include "project/Set_odom.h"
-#include <math.h>
+#include <cmath>
 #include <tf/transform_broadcaster.h>
 
 class pub_odom 
@@ -21,19 +21,20 @@ private:
     ros::ServiceServer reset_srv;
     ros::ServiceServer set_srv;
     int current_method;
-    float x, y, theta;
+    double x, y, theta;
     ros::Time current_time, last_time;
 
 public:
 
     pub_odom()
     {
-        n.getParam("/initial_x", x);  
-        n.getParam("/initial_y", y);  
-        n.getParam("/initial_theta", theta); 
+        x = n.getParam("/initial_x", x);
+        y = n.getParam("/initial_y", y);
+        theta = n.getParam("/initial_theta", theta);
+        current_method = n.getParam("/params/method", current_method);
         sub = n.subscribe("/my_twist", 1000, &pub_odom::callback, this);
-        pub = n.advertise<project::Odom_and_method>("/my_odom", 1000);
-        reset_srv = n.advertiseService("reset_odom", &pub_odom::reset, this);
+        pub = n.advertise<project::Odom_and_method>("my_odom", 1000);
+        n.advertiseService("reset_odom", &pub_odom::reset, this);
         set_srv = n.advertiseService("set_odom", &pub_odom::set, this);
         current_time = ros::Time::now();
         last_time = ros::Time::now();
@@ -88,12 +89,12 @@ public:
         msg.method.data = "rk";
 
         current_time = ros::Time::now();
-        int Ts_NSec =  (current_time - last_time).toNSec();
-        float Ts_Sec = Ts_NSec / 1000000000.0;
+        long Ts_NSec =  (current_time - last_time).toNSec();
+        long Ts_Sec = Ts_NSec / 1000000000.0;
         last_time = current_time;
 
-        float argument = theta + ((twist->twist.angular.z * Ts_Sec) / 2.0);
-        float vel = twist->twist.linear.x;
+        double argument = theta + ((twist->twist.angular.z * Ts_Sec) / 2.0);
+        double vel = twist->twist.linear.x;
         x = x + vel * Ts_Sec * cos(argument);
         y = y + vel * Ts_Sec * sin(argument);
         theta = theta + twist->twist.angular.z * Ts_Sec;
