@@ -35,6 +35,9 @@ CMakeLists.txt.user
 # vscode stuff
 .vscode
 
+# clion stuff
+.idea
+
 srv/_*.py
 *.pcd
 *.pyc
@@ -52,3 +55,4 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+/cmake-build-debug/

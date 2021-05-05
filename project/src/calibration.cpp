@@ -4,15 +4,14 @@
 #include "nav_msgs/Odometry.h"
 #include <message_filters/subscriber.h>
 #include <message_filters/sync_policies/approximate_time.h>
-#include <cmath>
 
 //Know parameters, in meters
 #define RADIUS 0.1575
 #define REAL_BL 0.583
-#define APPARENT_BL (REAL_BL * 1.78125) *  1.006987
+#define APPARENT_BL (((REAL_BL * 1.78125) *  1.006987))
 
 //Know parameters, dimensionless
-#define GEAR_RATIO (1/38.125) * 0.997544
+#define GEAR_RATIO (((1/38.125) * 0.997544))
 
 //Global variables
 int count = 0;

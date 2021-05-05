@@ -4,4 +4,4 @@
 #define APPARENT_BL 1.0457
 
 //Know parameters, dimensionless
-#define GEAR_RATIO 1/38.2189
+#define GEAR_RATIO (1/38.2189)

@@ -5,7 +5,7 @@
 #include <message_filters/subscriber.h>
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/approximate_time.h>
-#include <math.h>
+#include <cmath>
 
 //Define SyncPolicy
 typedef message_filters::sync_policies::ApproximateTime<robotics_hw1::MotorSpeed,
@@ -39,29 +39,29 @@ public:
     }
 
 
-    void callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFR,
-              const robotics_hw1::MotorSpeed::ConstPtr& motorRR,
-              const robotics_hw1::MotorSpeed::ConstPtr& motorRL,
-              const robotics_hw1::MotorSpeed::ConstPtr& motorFL)
+    void callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFr,
+              const robotics_hw1::MotorSpeed::ConstPtr& motorRr,
+              const robotics_hw1::MotorSpeed::ConstPtr& motorRl,
+              const robotics_hw1::MotorSpeed::ConstPtr& motorFl)
     {
         //Average rps of the two pairs of motors
-        float right_rpm =  (motorFR->rpm + motorRR->rpm) / 2;
-        float left_rpm  = -(motorFL->rpm + motorRL->rpm) / 2;
+        double right_rpm = (motorFr->rpm + motorRr->rpm) / 2;
+        double left_rpm  = -(motorFl->rpm + motorRl->rpm) / 2;
 
         //Compute linear velocity
         float scaling_factor = 2 * M_PI * RADIUS * GEAR_RATIO / 60 ;
-        float vel_r = right_rpm * scaling_factor;
-        float vel_l = left_rpm  * scaling_factor;
+        double vel_r = right_rpm * scaling_factor;
+        double vel_l = left_rpm  * scaling_factor;
 
-        float vel_x = (vel_r + vel_l) / 2;
-        float vel_y = 0;
+        double vel_x = (vel_r + vel_l) / 2;
+        //double vel_y = 0;
 
         //Compute angular velocity
-        float y0 = APPARENT_BL / 2;
-        float w_z = (vel_r - vel_l) / (2 * y0);
+        double y0 = APPARENT_BL / 2;
+        double w_z = (vel_r - vel_l) / (2 * y0);
 
         //Publish the message
-        msg.header.stamp = motorFR->header.stamp;
+        msg.header.stamp = motorFr->header.stamp;
         msg.header.frame_id = "odom";
         msg.twist.linear.x = vel_x;
         // msg.twist.linear.y = 0;
