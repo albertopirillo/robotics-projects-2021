@@ -3,9 +3,8 @@
 #include "geometry_msgs/TwistStamped.h"
 #include "nav_msgs/Odometry.h"
 #include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
 #include <message_filters/sync_policies/approximate_time.h>
-#include <math.h>
+#include <cmath>
 
 //Know parameters, in meters
 #define RADIUS 0.1575
@@ -17,10 +16,10 @@
 
 //Global variables
 int count = 0;
-float odom_value_x = 0;
-float my_value_x = 0;
-float odom_value_z = 0;
-float my_value_z = 0;
+double odom_value_x = 0;
+double my_value_x = 0;
+double odom_value_z = 0;
+double my_value_z = 0;
 
 //Estimate linear and angular velocity of the robot from motor speeds
 void estimate_callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFR,
@@ -28,21 +27,20 @@ void estimate_callback(const robotics_hw1::MotorSpeed::ConstPtr& motorFR,
               const robotics_hw1::MotorSpeed::ConstPtr& motorRL,
               const robotics_hw1::MotorSpeed::ConstPtr& motorFL,
               const nav_msgs::Odometry::ConstPtr& odom,
-              ros::Publisher pub) {
+              const ros::Publisher& pub) {
 
     ///////////////////computing odom//////////////////////////
-    float right_rpm =  (motorFR->rpm + motorRR->rpm) / 2;
-    float left_rpm  = -(motorFL->rpm + motorRL->rpm) / 2;
+    double right_rpm =  (motorFR->rpm + motorRR->rpm) / 2;
+    double left_rpm  = -(motorFL->rpm + motorRL->rpm) / 2;
 
     float scaling_factor = 2 * M_PI * RADIUS * GEAR_RATIO / 60 ;
-    float vel_r = right_rpm * scaling_factor;
-    float vel_l = left_rpm  * scaling_factor;
+    double vel_r = right_rpm * scaling_factor;
+    double vel_l = left_rpm  * scaling_factor;
 
-    float vel_x = (vel_r + vel_l) / 2;
-    float vel_y = 0;
+    double vel_x = (vel_r + vel_l) / 2;
 
     float y0 = APPARENT_BL / 2;
-    float w_z = (vel_r - vel_l) / (2 * y0);
+    double w_z = (vel_r - vel_l) / (2 * y0);
     ///////////////////////////////////////////////////////
 
     ///////////////gear ratio calibration//////////////////
