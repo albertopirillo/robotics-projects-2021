@@ -32,7 +32,8 @@ public:
         current_method = n.getParam("/params/method", current_method);
         sub = n.subscribe("/my_twist", 1000, &pub_odom::callback, this);
         pub = n.advertise<project::Odom_and_method>("my_odom", 1000);
-        n.advertiseService("reset_odom", &pub_odom::reset, this);
+        //FIX: RESET_SRV NOT WORKING
+        reset_srv = n.advertiseService("reset_odom", &pub_odom::reset, this);
         set_srv = n.advertiseService("set_odom", &pub_odom::set, this);
         current_time = ros::Time::now();
         last_time = ros::Time::now();
@@ -43,7 +44,7 @@ public:
         x = 0;
         y = 0;
         theta = 0;
-        ROS_INFO("Odom has been reset to (0,0, 0)");
+        ROS_INFO("Odom has been reset to (0,0,0)");
         return true;
     }
 
@@ -69,8 +70,8 @@ public:
         msg.method.data = "euler";
 
         current_time = ros::Time::now();
-        long Ts_NSec =  (current_time - last_time).toNSec();
-        float Ts_Sec = Ts_NSec / 1000000000.0;
+        unsigned long Ts_NSec =  current_time.toNSec() - last_time.toNSec();
+        double Ts_Sec = (double)Ts_NSec / 1000000000.0;
         last_time = current_time;
 
         //With skid-steering approximate kinematics, vel_y is always 0
@@ -87,8 +88,8 @@ public:
         msg.method.data = "rk";
 
         current_time = ros::Time::now();
-        long Ts_NSec =  (current_time - last_time).toNSec();
-        double Ts_Sec = Ts_NSec / 1000000000.0;
+        unsigned long Ts_NSec =  current_time.toNSec() - last_time.toNSec();
+        double Ts_Sec = (double)Ts_NSec / 1000000000.0;
         last_time = current_time;
 
         double argument = theta + ((twist->twist.angular.z * Ts_Sec) / 2.0);

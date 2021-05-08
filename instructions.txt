@@ -15,13 +15,12 @@ Parameters description:
     - method is the parameter that can be dynamically reconfigured to change integration method
 
 TF tree structure:
-    - //TODO rosrun rqt_tf_tree rqt_tf_tree
-    - //TODO rqt_graph and select active nodes/topics
+    world  ==> odom  ==> base_link
 
 Custom message structure:
-    - Odom_and_method.msg contains:
-        - The computed odometry from pub_odom.cpp
-        - The integration method, that can be either "euler" or "rk"
+    Odom_and_method.msg contains:
+      - The computed odometry from pub_odom.cpp
+      - The integration method, that can be either "euler" or "rk"
 
 Launchfiles description:
     - launch.launcher: the launchfile that was asked in the requirements, it only launches what is necessary

@@ -13,9 +13,8 @@
     <node pkg="project" type="pub_odom" name="pub_odom" output="screen"/>
     <node pkg="project" type="tf_node" name="tf_node"/>
 
-    <!-- TODO: still not working  -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="world"
-          args="-0.832142114639 0.426361680031 0.324720174074 0.0221652016044 -0.0104456143454 -0.533567428589 0.845402538776
-        odom world"/>
+          args="-0.598297894001 0.442829757929 0.330364078283
+           -0.00782093405724 0.0201139133424 0.64408993721 0.764645338058 world odom"/>
 
 </launch>

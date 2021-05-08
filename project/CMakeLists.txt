@@ -6,8 +6,8 @@ project(project)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS
-  message_filters
   robotics_hw1
+  message_filters
   roscpp
   rospy
   std_msgs
@@ -51,7 +51,8 @@ generate_dynamic_reconfigure_options(
 ## Declare things to be passed to dependent projects
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  CATKIN_DEPENDS 
+  CATKIN_DEPENDS
+  robotics_hw1
   message_runtime
   std_msgs
   nav_msgs

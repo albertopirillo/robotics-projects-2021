@@ -4,12 +4,10 @@
   <version>0.0.0</version>
   <description>The project package</description>
   <maintainer email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</maintainer>
-  <author email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</author> 
-  <!-- private repository -->
-  <url type="website">https://github.com/AlbertoPirillo/ros-first-project</url>
-  <license>TODO</license>
+  <author email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
   <build_depend>message_filters</build_depend>
   <build_depend>robotics_hw1</build_depend>
   <build_depend>roscpp</build_depend>
@@ -17,7 +15,6 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
   <build_depend>dynamic_reconfigure</build_depend>
-  <build_depend>message_generation</build_depend>
 
   <build_export_depend>message_filters</build_export_depend>
   <build_export_depend>robotics_hw1</build_export_depend>
