@@ -11,6 +11,7 @@ int main(int argc, char** argv)
     }
 
     ros::NodeHandle n;
+    ros::service::waitForService("set_odom");
     ros::ServiceClient set_client = n.serviceClient<project::Set_odom>("set_odom");
     project::Set_odom srv;
     srv.request.x = atoll(argv[1]);

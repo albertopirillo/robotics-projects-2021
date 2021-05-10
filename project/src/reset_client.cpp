@@ -14,6 +14,7 @@ int main(int argc, char** argv)
     ros::ServiceClient reset_client = n.serviceClient<project::Reset_odom>("reset_odom");
     project::Reset_odom srv;
 
+    ros::service::waitForService("reset_odom");
     if (reset_client.call(srv))
     {
         ROS_INFO("Odometry has been reset");

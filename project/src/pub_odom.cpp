@@ -32,7 +32,6 @@ public:
         current_method = n.getParam("/params/method", current_method);
         sub = n.subscribe("/my_twist", 1000, &pub_odom::callback, this);
         pub = n.advertise<project::Odom_and_method>("my_odom", 1000);
-        //FIX: RESET_SRV NOT WORKING
         reset_srv = n.advertiseService("reset_odom", &pub_odom::reset, this);
         set_srv = n.advertiseService("set_odom", &pub_odom::set, this);
         current_time = ros::Time::now();

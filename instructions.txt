@@ -22,6 +22,10 @@ Custom message structure:
       - The computed odometry from pub_odom.cpp
       - The integration method, that can be either "euler" or "rk"
 
+Services description:
+    - To reset odometry to (0,0,0): "rosservice call reset_odom"
+    - To set odometry to (x,y,theta): "rosservice call set_odom x y theta"
+
 Launchfiles description:
     - launch.launcher: the launchfile that was asked in the requirements, it only launches what is necessary
     - bag.launcher: in addition to the previous one, it also plays bag1.bag

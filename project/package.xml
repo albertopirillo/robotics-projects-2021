@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>project</name>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
   <description>The project package</description>
   <maintainer email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</maintainer>
   <author email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</author>
+  <url type="website">TODO</url>
+  <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>message_generation</build_depend>
