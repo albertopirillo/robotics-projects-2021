@@ -5,41 +5,43 @@ project(project)
 # add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS
-  robotics_hw1
-  message_filters
-  roscpp
-  rospy
-  std_msgs
-  message_generation
-  geometry_msgs
-  nav_msgs
-  dynamic_reconfigure
-  tf
-  tf2 
-  tf2_ros
+find_package(catkin REQUIRED
+  COMPONENTS
+    robotics_hw1
+    message_filters
+    roscpp
+    rospy
+    std_msgs
+    message_generation
+    geometry_msgs
+    nav_msgs
+    dynamic_reconfigure
+    tf
+    tf2
+    tf2_ros
 )
 
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Odom_and_method.msg
+    Odom_and_method.msg
 
 )
 
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  Reset_odom.srv
-  Set_odom.srv
+    Reset_odom.srv
+    Set_odom.srv
 
 )
 
 # Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
-  std_msgs
-  nav_msgs
+    std_msgs
+    nav_msgs
+    robotics_hw1
 )
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
@@ -52,10 +54,10 @@ generate_dynamic_reconfigure_options(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   CATKIN_DEPENDS
-  robotics_hw1
-  message_runtime
-  std_msgs
-  nav_msgs
+    robotics_hw1
+    message_runtime
+    std_msgs
+    nav_msgs
 
 )
 
@@ -71,6 +73,12 @@ add_executable(pub_odom src/pub_odom.cpp)
 add_executable(tf_node src/tf.cpp)
 add_executable(reset src/reset_client.cpp)
 add_executable(set src/set_client.cpp)
+
+## Custom messages dependencies
+add_dependencies(calib project_generate_messages_cpp)
+add_dependencies(pub_odom project_generate_messages_cpp)
+add_dependencies(pub_twist project_generate_messages_cpp)
+add_dependencies(tf_node project_generate_messages_cpp)
 
 ## Add cmake target dependencies of the executable
 add_dependencies(params ${PROJECT_NAME}_gencfg)
