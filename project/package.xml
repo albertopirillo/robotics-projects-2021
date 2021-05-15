@@ -5,8 +5,8 @@
   <description>The project package</description>
   <maintainer email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</maintainer>
   <author email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</author>
-  <url type="website">TODO</url>
-  <license>TODO</license>
+  <url type="website">https://github.com/AlbertoPirillo/ros-first-project-2021</url>
+  <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>message_generation</build_depend>

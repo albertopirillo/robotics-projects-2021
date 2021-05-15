@@ -17,6 +17,9 @@ Estimate linear and angular velocity from motors speed and then compute odometry
 - [ROS Melodic 1.0](http://wiki.ros.org/melodic)
 - [Visual Studio Code](https://code.visualstudio.com/)
 
+## License & Copyright
+Licensed under [MIT License](LICENSE)
+
 ## About the robot
 - [Website](https://www.agilex.ai/index/product/id/2?lang=en-us)
 - [User manual](https://www.generationrobots.com/media/agilex/SCOUT2.0_UserManual_v2.0_EN.pdf)
