@@ -1,6 +1,10 @@
-# First Robotics project
-## SCOUT 2.0: Odometry with ROS, AA. 2020-2021
-Estimate linear and angular velocity from motors speed and then compute odometry, using C/C++ language.
+This repository contains the lab projects for the Robotics course of AA. 2020-2021 at Politecnico di Milano.
+
+Both the projects are implemented in ROS, an open-source robotics middleware suite.
+
+# First project
+## SCOUT 2.0: Odometry with ROS
+Estimate linear and angular velocity from motors speed and then compute odometry, using the C++ language.
 
 **1.** Compute odometry using skid steering (approx) kinematics
    - using Euler and Runge-Kutta integration
@@ -12,13 +16,32 @@ Estimate linear and angular velocity from motors speed and then compute odometry
 
 **4.** Publish a custom message with odometry value and type of integration
 
+# Second project
+## Mapping and localization with ROS
+Calibrate sensors, create a map and perform localization
+
+**1.** Calibrate the static TF between the odometry and the laser sensor
+
+**2.** Create the map with GMapping, using the provided odometry 
+
+**3.** IMU Tools can be used to preprocess IMU data
+
+**4.** Perform localization with AMCL and Robot Localizaiton using the map
+
 ## Software
 - [Ubuntu 18.04](https://releases.ubuntu.com/18.04/)
 - [ROS Melodic 1.0](http://wiki.ros.org/melodic)
 - [Visual Studio Code](https://code.visualstudio.com/)
+- [CLion 2020.3.4](https://www.jetbrains.com/clion/)
 
 ## License & Copyright
 Licensed under [MIT License](LICENSE)
+
+## Sensors
+- [SICK LMS100 LIDAR](https://www.sick.com/it/en/detection-and-ranging-solutions/2d-lidar-sensors/lms1xx/lms100-10000/p/p109841)
+- [OptiTrack Markers](https://optitrack.com/applications/robotics/)
+- [Intel T265 Odom Camera](https://www.intelrealsense.com/tracking-camera-t265/)
+- [Pixhawk mini IMU](http://www.holybro.com/product/pixhawk-mini/) 
 
 ## About the robot
 - [Website](https://www.agilex.ai/index/product/id/2?lang=en-us)
