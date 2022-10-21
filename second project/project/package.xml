@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>project</name>
+  <version>1.0.0</version>
+  <description>The project package</description>
+
+  <author email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</author>
+  <maintainer email="alberto.pirillo@mail.polimi.it">Alberto Pirillo</maintainer>
+  <license>MIT</license>
+  <url type="website">https://github.com/AlbertoPirillo/ros-second-project-2021/</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>tf2</build_depend>
+
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>tf2</build_export_depend>
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>tf2</exec_depend>
+
+  <export>
+
+  </export>
+</package>

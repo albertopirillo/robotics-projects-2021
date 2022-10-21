@@ -1,0 +1,38 @@
+10667220, Alberto Pirillo
+
+
+Launchfile description:
+ - gmapping_scout.launch: performs GMapping with /scout_odom
+ - gmapping_camera.launch: performs GMapping with /camera/odom/sample
+ - amcl.launch: performs localization with AMCL using the recorded map
+ - ekf.launch: perform localization with EKF using the recorded map
+
+
+Bags used:
+ - Only the "default" bags were used
+ - Map was creating by using 1.bag
+ - AMCL was performed by using 2.bag
+ - EKF was performed by using 3.bag
+
+
+TF Tree:
+ - The structure of the TF Tree was not changed, only the missing static transform was added
+ - "rosrun rqt_tf_tree rqt_tf_tree" can be used to visualize the tree
+
+
+Node description:
+ - conversion.cpp: used to quickly convert yaw in the corresponding quaternion
+
+
+GMapping infos:
+ - I decided to use the odometry provided from Intel camera in place of scout/odom
+ - This because scout_odom already proved to be very imprecise in the first project
+
+
+Robot localization infos:
+ - Sensors used:
+    - Odometry from the Intel Camera: good source of odometry
+    - GT Pose from the OptiTrack: provides accurate position, even if not always present
+    - IMU from the Pixhawk Mini: the only source of absolute orientation
+    => to this task, IMU tools were used to fuse the IMU data and retrieve the orientation
+ - The true/false of the config matrix were established by looking at the filed of the messages with "rostopic echo"
